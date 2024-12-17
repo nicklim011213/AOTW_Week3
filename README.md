@@ -25,7 +25,7 @@ Stretch goals will be added once the base functions are ready.
 ## Progress
 | **Day**       | **Progress**                                                   |
 |---------------|----------------------------------------------------------------|
-| **Monday:**   |                                                                |
+| **Monday:**   | Create a plan on how the engine is supposed to work with inputs|
 | **Tuesday:**  |                                                                |
 | **Wednesday:**|                                                                |
 | **Thursday:** |                                                                |

@@ -11,19 +11,16 @@ This is the end goal. Once the main end goal has been reached, I add stretch goa
 
 ---
 
-## This week’s app is: 
-# DELAYED
-The base goal is TBD
+## This week’s app is: :sparkles: a mini graphics engine :sparkles:
+The base goal is to **Display objects** in a window with a proper viewing scale.
+I should also be able to add and remove items from a scene.
+Because this project might a while longer to complete I might stretch this out into week 4 as well.
+Stretch goals will be added once the base functions are ready.
 
 **Stretch goals will be added here:**  
 
-# Delay:  
-This week's project is delayed by a week. Multiple compounding commitments  
-this week means I will have to postpone this project until next week.  
-AOTW will return next week and this GitHub will be updated to represent  
-that once the postpone is over.
-
 ---
+
 
 ## Progress
 | **Day**       | **Progress**                                                   |

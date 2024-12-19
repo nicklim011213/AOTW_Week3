@@ -27,7 +27,7 @@ Stretch goals will be added once the base functions are ready.
 |---------------|----------------------------------------------------------------|
 | **Monday:**   | Create a plan on how the engine is supposed to work with inputs|
 | **Tuesday:**  | Create basic entry. Most of it was Ctrl C V from old projects  |
-| **Wednesday:**|                                                                |
+| **Wednesday:**| Create base classes for data storage. Some edits to plan       |
 | **Thursday:** |                                                                |
 | **Friday:**   |                                                                |
 | **Saturday:** |                                                                |

@@ -29,6 +29,6 @@ Stretch goals will be added once the base functions are ready.
 | **Tuesday:**  | Create basic entry. Most of it was Ctrl C V from old projects  |
 | **Wednesday:**| Create base classes for data storage. Some edits to plan       |
 | **Thursday:** | Unforseen circumstances means no commit. will commit Saturday  |
-| **Friday:**   | Same thing as yesterday, ill post something at like 2AM tonight|
+| **Friday:**   | Same thing as yesterday, ill post something sunday             |
 | **Saturday:** |                                                                |
 | **Sunday:**   |                                                                |

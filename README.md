@@ -30,5 +30,16 @@ Stretch goals will be added once the base functions are ready.
 | **Wednesday:**| Create base classes for data storage. Some edits to plan       |
 | **Thursday:** | Unforseen circumstances means no commit. will commit Saturday  |
 | **Friday:**   | Same thing as yesterday, ill post something sunday             |
+| **Saturday:** | Work more on object loading, still need to setup render code   |
+| **Sunday:**   |                                                                |
+
+## Progress (Week 2)
+| **Day**       | **Progress**                                                   |
+|---------------|----------------------------------------------------------------|
+| **Monday:**   |                                                                |
+| **Tuesday:**  |                                                                |
+| **Wednesday:**|                                                                |
+| **Thursday:** |                                                                |
+| **Friday:**   |                                                                |
 | **Saturday:** |                                                                |
 | **Sunday:**   |                                                                |

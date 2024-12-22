@@ -1,6 +1,7 @@
 #include "glad.h"
 #include "glfw3.h"
 #include <iostream>
+#include "Objects.h";
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
@@ -34,6 +35,10 @@ int main()
 
 	glViewport(0, 0, 1920, 1080);
 
+	//LoadShaders();
+	//LoadObjects();
+	LoadedObjects ObjectLoader;
+	ObjectLoader.LoadObjects();
 
 	while (!glfwWindowShouldClose(window))
 	{

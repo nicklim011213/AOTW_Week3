@@ -1,59 +1,38 @@
-#include <iostream>
-#include <fstream>
-#include "Shaders.cpp"
-#include <list>
+#include "Objects.h"
+#include <string>
 
-class Point3D
-{
-	float X = 0;
-	float Y = 0;
-	float Z = 0;
-};
+	LoadedObjects* LoadedObjects::Instance = nullptr;
 
-class Point2D
-{
-	float X = 0;
-	float Y = 0;
-};
-
-class Color
-{
-	int R = 255;
-	int G = 255;
-	int B = 255;
-	int A = 255;
-
-	Color(int R, int G, int B)
+	Object LoadedObjects::FindObject(std::string ID)
 	{
-		this->R = R;
-		this->G = G;
-		this->B = B;
-		A = 255;
+		return *Instance->ObjectStorage.find(ID)->second;
+	}
 
-		if (R > 255 || R < 0)
+	void LoadedObjects::LoadObjects()
+	{
+		std::filesystem::directory_iterator FilePointer(std::filesystem::current_path());
+		for (const auto Entry : FilePointer)
 		{
-			R = 255;
-			std::cerr << "Red value out of range set to 255\n";
-		}
-		if (G > 255 || G < 0)
-		{
-			G = 255;
-			std::cerr << "Green value out of range set to 255\n";
-		}
-		if (B > 255 || B < 0)
-		{
-			B = 255;
-			std::cerr << "Blue value out of range set to 255\n";
+			if (Entry.path().string().find(".OBX") == std::string::npos)
+			{
+				continue;
+			}
+			std::ifstream File(Entry.path());
+			std::string temp, StringObject, IDLine;
+			bool FirstLine = true;
+			while (std::getline(File, temp))
+			{
+				if (FirstLine)
+				{
+					IDLine += temp;
+					FirstLine = false;
+				}
+				StringObject += temp + "\n";
+			}
+			FirstLine = true;
+			Object* TempObject = new Object(StringObject, IDLine);
+			ObjectStorage[IDLine] = TempObject;
+			TempObject = nullptr;
+			// Note we still have to delete the objects in the map to avoid mem leaks
 		}
 	}
-};
-
-class Object
-{
-	std::string ObjectId = "UniqueObjectId";
-	std::list<Point3D> VertexList;
-	std::list<int> IndexList;
-	std::list<Point2D> TexturecordList;
-	std::list<Color> ColorList;
-	Point3D CenterPoint;
-};

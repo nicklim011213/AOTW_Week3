@@ -35,8 +35,6 @@ int main()
 
 	glViewport(0, 0, 1920, 1080);
 
-	//LoadShaders();
-	//LoadObjects();
 	LoadedObjects ObjectLoader;
 	ObjectLoader.LoadObjects();
 

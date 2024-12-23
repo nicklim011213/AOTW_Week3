@@ -1,19 +1,6 @@
-#ifndef SHADERMODULE
-#define SHADERMODULE
+#include "Shaders.h"
 
-#include <iostream>
-#include <fstream>
-#include <string>
-
-class Shader
-{
-public:
-	std::string Name;
-	char ShaderType = 'U';
-	std::string Code;
-	int ShaderId = -1;
-
-	Shader(std::string Filepath, char ShaderType)
+	Shader::Shader(std::string Filepath, char ShaderType)
 	{
 		std::string Filename = "";
 		std::ifstream File(Filepath);
@@ -43,6 +30,3 @@ public:
 			Code += temp;
 		}
 	}
-};
-
-#endif // ! SHADERMODULE

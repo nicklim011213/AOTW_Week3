@@ -27,12 +27,26 @@
 					IDLine += temp;
 					FirstLine = false;
 				}
-				StringObject += temp + "\n";
+				else
+				{
+					StringObject += temp + "\n";
+				}
 			}
 			FirstLine = true;
 			Object* TempObject = new Object(StringObject, IDLine);
 			ObjectStorage[IDLine] = TempObject;
 			TempObject = nullptr;
 			// Note we still have to delete the objects in the map to avoid mem leaks
+		}
+	}
+
+	Object::Object(std::string FileContents, std::string ObjectId)
+	{
+		this->ObjectId = ObjectId;
+		std::stringstream LineReader(FileContents);
+		std::string temp;
+		while (std::getline(LineReader, temp))
+		{
+
 		}
 	}

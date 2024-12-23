@@ -6,6 +6,8 @@
 #include <map>
 #include <filesystem>
 #include <fstream>
+#include <string>
+#include <sstream>
 
 class Point3D
 {
@@ -62,10 +64,7 @@ public:
 	std::list<Color> ColorList;
 	Point3D CenterPoint;
 
-	Object(std::string FileContents, std::string ObjectId)
-	{
-		this->ObjectId = ObjectId;
-	}
+	Object(std::string FileContents, std::string ObjectId);
 };
 
 class LoadedObjects

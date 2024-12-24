@@ -8,15 +8,15 @@
 class Shader
 {
 
-	public:
-		std::string Name;
-		char ShaderType = 'U';
-		std::string Code;
-		int ShaderId = -1;
+public:
+	std::string Name;
+	char ShaderType = 'U';
+	std::string Code;
+	int ShaderId = -1;
 
-		Shader::Shader(std::string Filepath, char ShaderType);
+	Shader(std::string Filepath, char ShaderType);
 
-}
+};
 
 
 #endif // ! SHADERMODULE

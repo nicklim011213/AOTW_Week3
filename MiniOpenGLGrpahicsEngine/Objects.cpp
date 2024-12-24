@@ -44,9 +44,16 @@
 	{
 		this->ObjectId = ObjectId;
 		std::stringstream LineReader(FileContents);
-		std::string temp;
+		std::string temp, value;
+		int beforeindex = 0;
+		int afterindex = 0;
 		while (std::getline(LineReader, temp))
 		{
-
+			while (afterindex != std::string::npos)
+			{
+				afterindex = temp.find(',', beforeindex + 1);
+				value = temp.substr(beforeindex, afterindex - beforeindex);
+				beforeindex = afterindex + 1;
+			}
 		}
 	}

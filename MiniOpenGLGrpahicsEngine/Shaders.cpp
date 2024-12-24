@@ -7,7 +7,6 @@
 		if (!File.good())
 		{
 			std::cerr << "Error with file at: " << Filepath << "\n";
-			return;
 		}
 		int FilenameStart = Filepath.find_last_of('\\') + 1;
 		Filename = Filepath.substr(FilenameStart);

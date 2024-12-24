@@ -31,7 +31,7 @@ Stretch goals will be added once the base functions are ready.
 | **Thursday:** | Unforseen circumstances means no commit. will commit Saturday  |
 | **Friday:**   | Same thing as yesterday, ill post something sunday             |
 | **Saturday:** | Work more on object loading, still need to setup render code   |
-| **Sunday:**   |                                                                |
+| **Sunday:**   | Split headers and implmentation.                               |
 
 ## Progress (Week 2)
 | **Day**       | **Progress**                                                   |

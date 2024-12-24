@@ -36,7 +36,7 @@ Stretch goals will be added once the base functions are ready.
 ## Progress (Week 2)
 | **Day**       | **Progress**                                                   |
 |---------------|----------------------------------------------------------------|
-| **Monday:**   |                                                                |
+| **Monday:**   | Work on file reading loop, not much today ran out of time      |
 | **Tuesday:**  |                                                                |
 | **Wednesday:**|                                                                |
 | **Thursday:** |                                                                |

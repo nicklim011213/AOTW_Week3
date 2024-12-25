@@ -37,7 +37,7 @@ Stretch goals will be added once the base functions are ready.
 | **Day**       | **Progress**                                                   |
 |---------------|----------------------------------------------------------------|
 | **Monday:**   | Work on file reading loop, not much today ran out of time      |
-| **Tuesday:**  |                                                                |
+| **Tuesday:**  | Complete Obj read Color and tex function Center point auto     |
 | **Wednesday:**|                                                                |
 | **Thursday:** |                                                                |
 | **Friday:**   |                                                                |

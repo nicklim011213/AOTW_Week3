@@ -11,9 +11,14 @@
 
 class Point3D
 {
-	float X = 0;
-	float Y = 0;
-	float Z = 0;
+	public:
+		float X = 0;
+		float Y = 0;
+		float Z = 0;
+
+		Point3D(float, float, float);
+
+		Point3D() {};
 };
 
 class Point2D

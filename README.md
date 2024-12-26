@@ -38,7 +38,7 @@ Stretch goals will be added once the base functions are ready.
 |---------------|----------------------------------------------------------------|
 | **Monday:**   | Work on file reading loop, not much today ran out of time      |
 | **Tuesday:**  | Complete Obj read, Color and tex function, auto center next    |
-| **Wednesday:**|                                                                |
+| **Wednesday:**| work on add texture function. christmas took up alot of time   |                                        
 | **Thursday:** |                                                                |
 | **Friday:**   |                                                                |
 | **Saturday:** |                                                                |

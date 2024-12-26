@@ -95,3 +95,12 @@
 			}
 		}
 	}
+
+	void Object::AddTextureCord(int index, float Xtex, float Ytex)
+	{
+		this->Textures = true;
+		int location = 0;
+		std::list<Point2D>::iterator it = TexturecordList.begin();
+		std::advance(it, index);
+		*it = Point2D(Xtex, Ytex);
+	}

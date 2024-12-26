@@ -23,8 +23,13 @@ class Point3D
 
 class Point2D
 {
-	float X = 0;
-	float Y = 0;
+		float X = 0;
+		float Y = 0;
+
+		Point2D() {};
+
+	public: 
+		Point2D(float x, float y);
 };
 
 class Color
@@ -65,11 +70,14 @@ public:
 	std::string ObjectId = "UniqueObjectId";
 	std::list<Point3D> VertexList;
 	std::list<int> IndexList;
+	bool Textures, Colors = false;
 	std::list<Point2D> TexturecordList;
 	std::list<Color> ColorList;
 	Point3D CenterPoint;
 
 	Object(std::string FileContents, std::string ObjectId);
+
+	void AddTextureCord(int index, float Xtex, float Ytex);
 };
 
 class LoadedObjects

@@ -41,5 +41,5 @@ Stretch goals will be added once the base functions are ready.
 | **Wednesday:**| work on add texture function. christmas took up alot of time   |                                        
 | **Thursday:** | Ran out of time today, will commit saturday.                   |
 | **Friday:**   | Same deal as yesterday, will commit sunday.                    |
-| **Saturday:** |                                                                |
+| **Saturday:** | Plop in renderer  fix a stoi not stof bug.                     |
 | **Sunday:**   |                                                                |

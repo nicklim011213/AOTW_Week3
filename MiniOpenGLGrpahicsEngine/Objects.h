@@ -38,30 +38,30 @@ class Color
 	int G = 255;
 	int B = 255;
 	int A = 255;
+	public:
+		Color(int R, int G, int B)
+		{
+			this->R = R;
+			this->G = G;
+			this->B = B;
+			A = 255;
 
-	Color(int R, int G, int B)
-	{
-		this->R = R;
-		this->G = G;
-		this->B = B;
-		A = 255;
-
-		if (R > 255 || R < 0)
-		{
-			R = 255;
-			std::cerr << "Red value out of range set to 255\n";
+			if (R > 255 || R < 0)
+			{
+				R = 255;
+				std::cerr << "Red value out of range set to 255\n";
+			}
+			if (G > 255 || G < 0)
+			{
+				G = 255;
+				std::cerr << "Green value out of range set to 255\n";
+			}
+			if (B > 255 || B < 0)
+			{
+				B = 255;
+				std::cerr << "Blue value out of range set to 255\n";
+			}
 		}
-		if (G > 255 || G < 0)
-		{
-			G = 255;
-			std::cerr << "Green value out of range set to 255\n";
-		}
-		if (B > 255 || B < 0)
-		{
-			B = 255;
-			std::cerr << "Blue value out of range set to 255\n";
-		}
-	}
 };
 
 class Object
@@ -78,6 +78,8 @@ public:
 	Object(std::string FileContents, std::string ObjectId);
 
 	void AddTextureCord(int index, float Xtex, float Ytex);
+
+	void AddColor(Color basecolor);
 };
 
 class LoadedObjects

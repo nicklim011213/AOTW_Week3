@@ -1,7 +1,7 @@
 #include "glad.h"
 #include "glfw3.h"
 #include <iostream>
-#include "Objects.h";
+#include "Renderer.h"
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
@@ -37,9 +37,11 @@ int main()
 
 	LoadedObjects ObjectLoader;
 	ObjectLoader.LoadObjects();
+	ObjectLoader.FindObject("ExampleID").AddColor(Color{ 255, 0, 255 });
 
 	while (!glfwWindowShouldClose(window))
 	{
+		RenderLoopSetup(ObjectLoader, window);
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}

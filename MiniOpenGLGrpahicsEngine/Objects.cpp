@@ -47,6 +47,12 @@
 		Z = z;
 	}
 
+	Point2D::Point2D(float x, float y)
+	{
+		this->X = x;
+		this->Y = y;
+	}
+
 	Object::Object(std::string FileContents, std::string ObjectId)
 	{
 		this->ObjectId = ObjectId;
@@ -79,15 +85,15 @@
 						beforeindex = afterindex + 1;
 						if (i == 0)
 						{
-							x = std::stoi(value);
+							x = std::stof(value);
 						}
 						else if (i == 1)
 						{
-							y = std::stoi(value);
+							y = std::stof(value);
 						}
 						if (i == 2)
 						{
-							z = std::stoi(value);
+							z = std::stof(value);
 							this->VertexList.push_back(Point3D(x, y, z));
 						}
 					}				
@@ -103,4 +109,13 @@
 		std::list<Point2D>::iterator it = TexturecordList.begin();
 		std::advance(it, index);
 		*it = Point2D(Xtex, Ytex);
+	}
+
+	void Object::AddColor(Color basecolor)
+	{
+		this->Colors = true;
+		for (auto ittr = this->IndexList.begin(); ittr != this->IndexList.end(); ++ittr)
+		{
+			this->ColorList.push_back(basecolor);
+		}
 	}

@@ -34,11 +34,11 @@ class Point2D
 
 class Color
 {
-	int R = 255;
-	int G = 255;
-	int B = 255;
-	int A = 255;
 	public:
+		int R = 255;
+		int G = 255;
+		int B = 255;
+		int A = 255;
 		Color(int R, int G, int B)
 		{
 			this->R = R;
@@ -67,17 +67,18 @@ class Color
 class Object
 {
 public:
-	std::string ObjectId = "UniqueObjectId";
-	std::list<Point3D> VertexList;
-	std::list<int> IndexList;
-	bool Textures, Colors = false;
-	std::list<Point2D> TexturecordList;
-	std::list<Color> ColorList;
+	std::string ObjectId;
+	std::list<Point3D> VertexList = {};
+	std::list<int> IndexList = {};
+	bool Textures = false;
+	bool Colors = false;
+	std::list<Point2D> TexturecordList = {};
+	std::list<Color> ColorList = {};
 	Point3D CenterPoint;
 
 	Object(std::string FileContents, std::string ObjectId);
 
-	void AddTextureCord(int index, float Xtex, float Ytex);
+	//void AddTextureCord(int index, float Xtex, float Ytex);
 
 	void AddColor(Color basecolor);
 };
@@ -85,27 +86,10 @@ public:
 class LoadedObjects
 {
 public:
+	std::map<std::string, std::unique_ptr<Object>> ObjectStorage;
 
-	static LoadedObjects* Instance;
-	std::map<std::string, Object*> ObjectStorage;
-
-	LoadedObjects()
-	{
-		if (Instance == nullptr)
-		{
-			Instance = this;
-		}
-		else
-		{
-			std::cerr << "Error attempted a second creation of singleton LoadedObjects.\n";
-		}
-	}
-
-	Object FindObject(std::string ID);
+	std::unique_ptr<Object>& FindObject(std::string ID);
 	void LoadObjects();
-
-	LoadedObjects(LoadedObjects& Copy) {};
-	void operator=(LoadedObjects& Arg) {};
 };
 
 #endif // ! OBJECTMODULE

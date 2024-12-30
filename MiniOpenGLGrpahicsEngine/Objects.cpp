@@ -1,11 +1,14 @@
 #include "Objects.h"
 #include <string>
 
-	LoadedObjects* LoadedObjects::Instance = nullptr;
-
-	Object LoadedObjects::FindObject(std::string ID)
+	std::unique_ptr<Object>& LoadedObjects::FindObject(std::string ID)
 	{
-		return *Instance->ObjectStorage.find(ID)->second;
+		auto it = ObjectStorage.find(ID);
+		if (it == ObjectStorage.end())
+		{
+			std::cerr << "Flag\n";
+		}
+		return it->second;
 	}
 
 	void LoadedObjects::LoadObjects()
@@ -33,10 +36,10 @@
 				}
 			}
 			FirstLine = true;
-			Object* TempObject = new Object(StringObject, IDLine);
-			ObjectStorage[IDLine] = TempObject;
-			TempObject = nullptr;
-			// Note we still have to delete the objects in the map to avoid mem leaks
+			auto TempObject = std::make_unique<Object>(StringObject, std::string(IDLine));
+			std::cerr << "Inserting object with ID: " << IDLine << std::endl;
+			//ObjectStorage[IDLine] = std::move(TempObject);
+			ObjectStorage.insert({ IDLine , std::move(TempObject) });
 		}
 	}
 
@@ -100,8 +103,10 @@
 				}
 			}
 		}
+		this->ColorList = {};
 	}
 
+	/*
 	void Object::AddTextureCord(int index, float Xtex, float Ytex)
 	{
 		this->Textures = true;
@@ -110,12 +115,13 @@
 		std::advance(it, index);
 		*it = Point2D(Xtex, Ytex);
 	}
+	*/
 
 	void Object::AddColor(Color basecolor)
 	{
-		this->Colors = true;
-		for (auto ittr = this->IndexList.begin(); ittr != this->IndexList.end(); ++ittr)
+		//Colors = true;
+		for (auto ittr = IndexList.begin(); ittr != IndexList.end(); ++ittr)
 		{
-			this->ColorList.push_back(basecolor);
+			ColorList.push_back(basecolor);
 		}
 	}

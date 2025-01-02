@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <list>
-#include <map>
+#include <unordered_map>
 #include <filesystem>
 #include <fstream>
 #include <string>
@@ -81,12 +81,14 @@ public:
 	//void AddTextureCord(int index, float Xtex, float Ytex);
 
 	void AddColor(Color basecolor);
+
+	void CreateCenterCord();
 };
 
 class LoadedObjects
 {
 public:
-	std::map<std::string, std::unique_ptr<Object>> ObjectStorage;
+	std::unordered_map<std::string, std::unique_ptr<Object>> ObjectStorage;
 
 	std::unique_ptr<Object>& FindObject(std::string ID);
 	void LoadObjects();

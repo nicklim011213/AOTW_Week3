@@ -37,26 +37,7 @@ int main()
 
 	LoadedObjects ObjectLoader;
 	ObjectLoader.LoadObjects();
-	Color Temp = Color(255, 0, 255);
-
-	auto it = ObjectLoader.ObjectStorage.find(std::string("ExampleID"));
-	if (it != ObjectLoader.ObjectStorage.end())
-	{
-		if (it->second)
-		{
-			it->second->AddColor(Temp);
-		}
-		else
-		{
-			std::cerr << "Object with ID 'ExampleID' is null!" << std::endl;
-		}
-	}
-	else
-	{
-		std::cerr << "Object with ID 'ExampleID' not found!" << std::endl;
-	}
-
-	//ObjectLoader.ObjectStorage.find("ExampleID")->second->AddColor(Temp);
+	ObjectLoader.ObjectStorage.find("BOX")->second->AddColor(Color(255, 255, 0));
 
 	while (!glfwWindowShouldClose(window))
 	{

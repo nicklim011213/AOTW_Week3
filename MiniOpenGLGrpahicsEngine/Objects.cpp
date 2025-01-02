@@ -14,7 +14,7 @@
 	void LoadedObjects::LoadObjects()
 	{
 		std::filesystem::directory_iterator FilePointer(std::filesystem::current_path());
-		for (const auto Entry : FilePointer)
+		for (const std::filesystem::directory_entry Entry : FilePointer)
 		{
 			if (Entry.path().string().find(".OBX") == std::string::npos)
 			{
@@ -38,8 +38,7 @@
 			FirstLine = true;
 			auto TempObject = std::make_unique<Object>(StringObject, std::string(IDLine));
 			std::cerr << "Inserting object with ID: " << IDLine << std::endl;
-			//ObjectStorage[IDLine] = std::move(TempObject);
-			ObjectStorage.insert({ IDLine , std::move(TempObject) });
+			ObjectStorage[IDLine] = std::move(TempObject);
 		}
 	}
 
@@ -104,6 +103,7 @@
 			}
 		}
 		this->ColorList = {};
+		CreateCenterCord();
 	}
 
 	/*
@@ -119,9 +119,48 @@
 
 	void Object::AddColor(Color basecolor)
 	{
-		//Colors = true;
+		Colors = true;
 		for (auto ittr = IndexList.begin(); ittr != IndexList.end(); ++ittr)
 		{
 			ColorList.push_back(basecolor);
 		}
+	}
+
+	void Object::CreateCenterCord()
+	{
+		float xmax = VertexList.begin()->X, ymax = VertexList.begin()->Y, zmax = VertexList.begin()->Z, xmin = VertexList.begin()->X, ymin = VertexList.begin()->Y, zmin = VertexList.begin()->Z;
+		for (auto Vectors = VertexList.begin(); Vectors != VertexList.end(); Vectors++)
+		{
+			if (xmax < Vectors->X)
+			{
+				xmax = Vectors->X;
+			}
+			else if (xmin > Vectors->X)
+			{
+				xmin = Vectors->X;
+			}
+
+			if (ymax < Vectors->Y)
+			{
+				ymax = Vectors->Y;
+			}
+			else if (ymin > Vectors->Y)
+			{
+				ymin = Vectors->Y;
+			}
+
+			if (zmax < Vectors->Z)
+			{
+				zmax = Vectors->Z;
+			}
+			else if (zmin > Vectors->Z)
+			{
+				zmin = Vectors->Z;
+			}
+		}
+		float x = 0, y = 0, z = 0;
+		x = (abs(xmax) - abs(xmin)) / 2;
+		y = (abs(ymax) - abs(ymin)) / 2;
+		z = (abs(zmax) - abs(zmin)) / 2;
+		CenterPoint = Point3D(x,y,z);
 	}

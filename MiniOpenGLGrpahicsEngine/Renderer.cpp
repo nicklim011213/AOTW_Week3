@@ -12,22 +12,24 @@ void RenderLoopSetup(LoadedObjects &RenderObjects, GLFWwindow* window)
 		"out vec4 FragColor;\n"
 		"void main()\n"
 		"{\n"
-		"   FragColor = vec4(0.8f, 0.0f, 0.8f, 1f);\n"
+		"   FragColor = vec4(0.8f, 0.0f, 0.8f, 1.0);\n"
 		"}\n\0";
 
 	const char* vertexShaderSourceColor = "#version 330 core\n"
 		"layout (location = 0) in vec3 aPos;\n"
 		"layout (location = 1) in vec3 acolor;\n"
+		"out vec3 acolor_out;"
 		"void main()\n"
 		"{\n"
+		"	acolor_out = acolor;\n"
 		"   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
 		"}\0";
 	const char* fragmentShaderSourceColor = "#version 330 core\n"
-		"in vec3 acolor;"
+		"in vec3 acolor_out;"
 		"out vec4 FragColor;\n"
 		"void main()\n"
 		"{\n"
-		"   FragColor = vec4(acolor.x, acolor.y, acolor.z, 1f);\n"
+		"   FragColor = vec4(acolor_out, 1.0);\n"
 		"}\n\0";
 
 	// Non Color Shaders
@@ -137,8 +139,8 @@ void RenderLoopSetup(LoadedObjects &RenderObjects, GLFWwindow* window)
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBOColor);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, IndexDataColor.size() * sizeof(int), IndexDataColor.data(), GL_STATIC_DRAW);
 
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)3);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -150,7 +152,8 @@ void RenderLoopSetup(LoadedObjects &RenderObjects, GLFWwindow* window)
 	glUseProgram(shaderProgram);
 	glBindVertexArray(VAO);
 	glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
+	glBindVertexArray(0);
 	glUseProgram(shaderProgramColor);
 	glBindVertexArray(VAOColor);
-	glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
+	glDrawElements(GL_TRIANGLES, IndexDataColor.size(), GL_UNSIGNED_INT, 0);
 }

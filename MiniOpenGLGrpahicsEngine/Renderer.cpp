@@ -61,51 +61,49 @@ void RenderLoopSetup(LoadedObjects &RenderObjects, GLFWwindow* window)
 	glDeleteShader(fragmentShaderColor);
 
 	std::vector<float> VertexData, VertexDataColor;
-	for (auto itter = RenderObjects.ObjectStorage.begin(); itter != RenderObjects.ObjectStorage.end(); ++itter)
+	for (const auto& [ID, OBJ] : RenderObjects.ObjectStorage)
 	{
-		if (itter->second->Colors == true)
+		if (OBJ->Colors == true)
 		{
-			auto ColorItter = itter->second->ColorList.begin();
-			for (auto VertItter = itter->second->VertexList.begin(); VertItter != itter->second->VertexList.end(); ++VertItter)
+			int colorindex = 0;
+			auto ColorVal = OBJ->ColorList[colorindex];
+			for (const auto Vert : OBJ->VertexList)
 			{
-				VertexDataColor.push_back(VertItter->X);
-				VertexDataColor.push_back(VertItter->Y);
-				VertexDataColor.push_back(VertItter->Z);
-				VertexDataColor.push_back(ColorItter->R);
-				VertexDataColor.push_back(ColorItter->G);
-				VertexDataColor.push_back(ColorItter->B);
-				if (ColorItter != itter->second->ColorList.end())
-				{
-					++ColorItter;
-				}
+				VertexDataColor.push_back(Vert.X);
+				VertexDataColor.push_back(Vert.Y);
+				VertexDataColor.push_back(Vert.Z);
+				VertexDataColor.push_back(ColorVal.R);
+				VertexDataColor.push_back(ColorVal.G);
+				VertexDataColor.push_back(ColorVal.B);
+				colorindex++;
 			}
 		}
 		else
 		{
-			for (auto VertItter = itter->second->VertexList.begin(); VertItter != itter->second->VertexList.end(); ++VertItter)
+			for (const auto Vert : OBJ->VertexList)
 			{
-				VertexData.push_back(VertItter->X);
-				VertexData.push_back(VertItter->Y);
-				VertexData.push_back(VertItter->Z);
+				VertexData.push_back(Vert.X);
+				VertexData.push_back(Vert.Y);
+				VertexData.push_back(Vert.Z);
 			}
 		}
 	}
 
 	std::vector<int> IndexData, IndexDataColor;
-	for (auto itter = RenderObjects.ObjectStorage.begin(); itter != RenderObjects.ObjectStorage.end(); ++itter)
+	for (const auto& [ID, OBJ] : RenderObjects.ObjectStorage)
 	{
-		if (itter->second->Colors)
+		if (OBJ->Colors)
 		{
-			for (auto IndexItter = itter->second->IndexList.begin(); IndexItter != itter->second->IndexList.end(); ++IndexItter)
+			for (auto IndexItter : OBJ->IndexList)
 			{
-				IndexDataColor.push_back(*IndexItter);
+				IndexDataColor.push_back(IndexItter);
 			}
 		}
 		else
 		{
-			for (auto IndexItter = itter->second->IndexList.begin(); IndexItter != itter->second->IndexList.end(); ++IndexItter)
+			for (auto IndexItter : OBJ->IndexList)
 			{
-				IndexData.push_back(*IndexItter);
+				IndexData.push_back(IndexItter);
 			}
 		}
 	}

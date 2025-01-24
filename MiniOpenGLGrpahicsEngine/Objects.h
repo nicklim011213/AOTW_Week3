@@ -68,12 +68,12 @@ class Object
 {
 public:
 	std::string ObjectId;
-	std::list<Point3D> VertexList = {};
-	std::list<int> IndexList = {};
+	std::vector<Point3D> VertexList = {};
+	std::vector<int> IndexList = {};
 	bool Textures = false;
 	bool Colors = false;
-	std::list<Point2D> TexturecordList = {};
-	std::list<Color> ColorList = {};
+	std::vector<Point2D> TexturecordList = {};
+	std::vector<Color> ColorList = {};
 	Point3D CenterPoint;
 
 	Object(std::string FileContents, std::string ObjectId);
@@ -88,9 +88,9 @@ public:
 class LoadedObjects
 {
 public:
-	std::unordered_map<std::string, std::unique_ptr<Object>> ObjectStorage;
+	std::unordered_map<std::string, std::shared_ptr<Object>> ObjectStorage;
 
-	std::unique_ptr<Object>& FindObject(std::string ID);
+	std::shared_ptr<Object> FindObject(std::string ID);
 	void LoadObjects();
 };
 

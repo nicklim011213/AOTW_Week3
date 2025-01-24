@@ -1,14 +1,10 @@
 #include "Objects.h"
 #include <string>
 
-	std::unique_ptr<Object>& LoadedObjects::FindObject(std::string ID)
+	std::shared_ptr<Object> LoadedObjects::FindObject(std::string ID)
 	{
-		auto it = ObjectStorage.find(ID);
-		if (it == ObjectStorage.end())
-		{
-			std::cerr << "Flag\n";
-		}
-		return it->second;
+		auto it = ObjectStorage.at(ID);
+		return it;
 	}
 
 	void LoadedObjects::LoadObjects()
@@ -36,9 +32,9 @@
 				}
 			}
 			FirstLine = true;
-			auto TempObject = std::make_unique<Object>(StringObject, std::string(IDLine));
+			auto TempObject = std::make_shared<Object>(StringObject, std::string(IDLine));
 			std::cerr << "Inserting object with ID: " << IDLine << std::endl;
-			ObjectStorage[IDLine] = std::move(TempObject);
+			ObjectStorage[IDLine] = TempObject;
 		}
 	}
 
@@ -103,7 +99,7 @@
 			}
 		}
 		this->ColorList = {};
-		CreateCenterCord();
+		//CreateCenterCord();
 	}
 
 	/*
@@ -120,7 +116,7 @@
 	void Object::AddColor(Color basecolor)
 	{
 		Colors = true;
-		for (auto ittr = IndexList.begin(); ittr != IndexList.end(); ++ittr)
+		for (const auto& index : IndexList)
 		{
 			ColorList.push_back(basecolor);
 		}

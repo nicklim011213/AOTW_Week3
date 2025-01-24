@@ -37,7 +37,7 @@ int main()
 
 	LoadedObjects ObjectLoader;
 	ObjectLoader.LoadObjects();
-	ObjectLoader.ObjectStorage.find("BOX")->second->AddColor(Color(255, 255, 0));
+	ObjectLoader.FindObject("BOX")->AddColor(Color(255, 255, 0));
 
 	while (!glfwWindowShouldClose(window))
 	{

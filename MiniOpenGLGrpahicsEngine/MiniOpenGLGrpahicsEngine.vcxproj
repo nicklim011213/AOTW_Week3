@@ -143,6 +143,7 @@
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Include\glm\gtc\matrix_transform.hpp" />
     <ClInclude Include="Objects.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Shaders.h" />

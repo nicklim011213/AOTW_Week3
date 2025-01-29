@@ -41,5 +41,8 @@
     <ClInclude Include="Renderer.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="Include\glm\gtc\matrix_transform.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

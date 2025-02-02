@@ -3,7 +3,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-void RenderLoopSetup(LoadedObjects &RenderObjects, GLFWwindow* window)
+void RenderLoop(LoadedObjects& RenderObjects, GLFWwindow* window, Onetime OneTime)
 {
 	glm::mat4 model = glm::mat4(1.0f); // make sure to initialize matrix to identity matrix first
 	glm::mat4 view = glm::mat4(1.0f);
@@ -95,7 +95,9 @@ void RenderLoopSetup(LoadedObjects &RenderObjects, GLFWwindow* window)
 	glDeleteShader(vertexShader);
 	glDeleteShader(fragmentShader);
 
+	std::vector<int> IndexData, IndexDataColor;
 	std::vector<float> VertexData, VertexDataColor;
+	int vertexOffsetColor = 0, vertexOffset = 0;
 	for (const auto& [ID, OBJ] : RenderObjects.ObjectStorage)
 	{
 		if (OBJ->Colors == true)
@@ -112,6 +114,11 @@ void RenderLoopSetup(LoadedObjects &RenderObjects, GLFWwindow* window)
 				VertexDataColor.push_back(ColorVal.B);
 				colorindex++;
 			}
+			for (auto IndexItter : OBJ->IndexList)
+			{
+				IndexDataColor.push_back(IndexItter + vertexOffsetColor);
+			}
+			vertexOffsetColor += OBJ->VertexList.size();
 		}
 		else
 		{
@@ -121,43 +128,19 @@ void RenderLoopSetup(LoadedObjects &RenderObjects, GLFWwindow* window)
 				VertexData.push_back(Vert.Y);
 				VertexData.push_back(Vert.Z);
 			}
-		}
-	}
-
-	std::vector<int> IndexData, IndexDataColor;	
-	for (const auto& [ID, OBJ] : RenderObjects.ObjectStorage)
-	{
-		if (OBJ->Colors)
-		{
 			for (auto IndexItter : OBJ->IndexList)
 			{
-				IndexDataColor.push_back(IndexItter);
+				IndexData.push_back(IndexItter + vertexOffset);
 			}
-		}
-		else
-		{
-			for (auto IndexItter : OBJ->IndexList)
-			{
-				IndexData.push_back(IndexItter);
-			}
+			vertexOffset += OBJ->VertexList.size();
 		}
 	}
-
-	unsigned int VAO, VBO, EBO;
-	unsigned int VAOColor, VBOColor, EBOColor;
-
-	glGenVertexArrays(1, &VAO);
-	glGenBuffers(1, &VBO);
-	glGenBuffers(1, &EBO);
-	glGenVertexArrays(1, &VAOColor);
-	glGenBuffers(1, &VBOColor);
-	glGenBuffers(1, &EBOColor);
 
 	// Non Color Objects
-	glBindVertexArray(VAO);
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBindVertexArray(OneTime.VAO);
+	glBindBuffer(GL_ARRAY_BUFFER, OneTime.VBO);
 	glBufferData(GL_ARRAY_BUFFER, VertexData.size() * sizeof(float), VertexData.data(), GL_STATIC_DRAW);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, OneTime.EBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, IndexData.size() * sizeof(int), IndexData.data(), GL_STATIC_DRAW);
 
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
@@ -166,10 +149,10 @@ void RenderLoopSetup(LoadedObjects &RenderObjects, GLFWwindow* window)
 	glBindVertexArray(0);
 
 	// Color Objects
-	glBindVertexArray(VAOColor);
-	glBindBuffer(GL_ARRAY_BUFFER, VBOColor);
+	glBindVertexArray(OneTime.VAOColor);
+	glBindBuffer(GL_ARRAY_BUFFER, OneTime.VBOColor);
 	glBufferData(GL_ARRAY_BUFFER, VertexDataColor.size() * sizeof(float), VertexDataColor.data(), GL_STATIC_DRAW);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBOColor);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, OneTime.EBOColor);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, IndexDataColor.size() * sizeof(int), IndexDataColor.data(), GL_STATIC_DRAW);
 
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
@@ -181,12 +164,15 @@ void RenderLoopSetup(LoadedObjects &RenderObjects, GLFWwindow* window)
 
 	// Draw Commands
 	glClearColor(0.51f, 0.78f, 0.89f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glUseProgram(shaderProgram);
-	glBindVertexArray(VAO);
-	glDrawElements(GL_TRIANGLES, IndexData.size(), GL_UNSIGNED_INT, 0);
+	glBindVertexArray(OneTime.VAO);
+	//glDrawElements(GL_TRIANGLES, IndexData.size(), GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
 	glUseProgram(shaderProgramColor);
-	glBindVertexArray(VAOColor);
+	glBindVertexArray(OneTime.VAOColor);
 	glDrawElements(GL_TRIANGLES, IndexDataColor.size(), GL_UNSIGNED_INT, 0);
+	glDeleteProgram(shaderProgram);
+	glDeleteProgram(shaderProgramColor);
 }
+

@@ -3,8 +3,19 @@
 
 	std::shared_ptr<Object> LoadedObjects::FindObject(std::string ID)
 	{
-		auto it = ObjectStorage.at(ID);
-		return it;
+		try
+		{
+			auto it = ObjectStorage.at(ID);
+			return it;
+		}
+		catch (std::out_of_range)
+		{
+			std::cout << "Finding an id was out of range" << std::endl;
+			std::cout << "likely due to linux vs windows new line" << std::endl;
+			std::cout << "rerunning with a query with an appened carrige return" << std::endl;
+			auto it = ObjectStorage.at(ID + '\r');
+			return it;
+		}
 	}
 
 	void LoadedObjects::LoadObjects()

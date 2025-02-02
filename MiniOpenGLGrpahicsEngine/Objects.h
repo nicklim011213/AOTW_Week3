@@ -8,6 +8,7 @@
 #include <fstream>
 #include <string>
 #include <sstream>
+#include <vector>
 
 class Point3D
 {
@@ -39,11 +40,11 @@ class Color
 		int G = 255;
 		int B = 255;
 		int A = 255;
-		Color(int R, int G, int B)
+		Color(int Red, int Green, int Blue)
 		{
-			this->R = R;
-			this->G = G;
-			this->B = B;
+			R = Red;
+			G = Green;
+			B = Blue;
 			A = 255;
 
 			if (R > 255 || R < 0)

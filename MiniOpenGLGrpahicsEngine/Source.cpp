@@ -34,14 +34,18 @@ int main()
 	}
 
 	glViewport(0, 0, 1920, 1080);
+	glEnable(GL_DEPTH_TEST);
 
 	LoadedObjects ObjectLoader;
+	Onetime OneTimeRenderSetup;
 	ObjectLoader.LoadObjects();
-	ObjectLoader.FindObject("BOX")->AddColor(Color(255, 255, 0));
+	ObjectLoader.FindObject("2DBOXFAR")->AddColor(Color(255, 255, 0));
+	ObjectLoader.FindObject("WALL2D")->AddColor(Color(0, 0, 255));
 
+	OneTimeRenderSetup.RenderSetup();
 	while (!glfwWindowShouldClose(window))
 	{
-		RenderLoopSetup(ObjectLoader, window);
+		RenderLoop(ObjectLoader, window, OneTimeRenderSetup);
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
